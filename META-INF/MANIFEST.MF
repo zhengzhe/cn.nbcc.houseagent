@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Houseagent
+Bundle-SymbolicName: cn.nbcc.houseagent; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: cn.nbcc.houseagent.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.intro,
+ org.eclipse.core.databinding,
+ org.eclipse.core.databinding.beans,
+ org.eclipse.core.databinding.observable,
+ org.eclipse.core.databinding.property,
+ org.eclipse.jface.databinding,
+ com.ibm.icu
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: .,
+ libs/jRegistryKey.jar,
+ calendarcombo-1.0.0.jar,
+ cdatetime-0.14.0.jar,
+ cwt-0.9.0.jar,
+ datechooser-1.0.0.jar,
+ formattedtext-1.0.0.jar,
+ swt-grouplayout.jar

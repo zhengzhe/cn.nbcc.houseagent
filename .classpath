@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry excluding="ca/beq/util/win32/" kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="libs/jRegistryKey.jar"/>
+	<classpathentry kind="lib" path="calendarcombo-1.0.0.jar" sourcepath="calendarcombo-1.0.0-src.zip"/>
+	<classpathentry kind="lib" path="cdatetime-0.14.0.jar" sourcepath="cdatetime-0.14.0-src.zip"/>
+	<classpathentry kind="lib" path="cwt-0.9.0.jar" sourcepath="cwt-0.9.0-src.zip"/>
+	<classpathentry kind="lib" path="datechooser-1.0.0.jar" sourcepath="datechooser-1.0.0-src.zip"/>
+	<classpathentry kind="lib" path="formattedtext-1.0.0.jar" sourcepath="formattedtext-1.0.0-src.zip"/>
+	<classpathentry kind="lib" path="swt-grouplayout.jar" sourcepath="swt-grouplayout.zip"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
