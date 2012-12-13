@@ -6,11 +6,6 @@ import cn.nbcc.houseagent.model.RentItem;
 import cn.nbcc.houseagent.model.RentItemManager;
 
 /**
- * @author dell
- *
- *Update:下午02:38:30
- */
-/**
  * @author zhengzhe
  *
  *Update:下午02:38:31

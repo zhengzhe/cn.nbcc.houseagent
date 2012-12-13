@@ -170,6 +170,15 @@
             </command>
          </toolbar>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:cn.nbcc.houseagent.rentitemview?after=additions">
+         <menu
+               commandId="cn.nbcc.houseagent.commands.rent"
+               id="cn.nbcc.houseagent.rentitem.popup.rent"
+               label="出租">
+         </menu>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">

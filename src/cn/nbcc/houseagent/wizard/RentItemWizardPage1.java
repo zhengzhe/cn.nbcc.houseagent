@@ -35,7 +35,7 @@ import com.swtdesigner.ResourceManager;
 import org.eclipse.core.databinding.beans.BeansObservables;
 
 /**
- * @author dell
+ * @author zhengzhe
  *
  */
 public class RentItemWizardPage1 extends WizardPage {

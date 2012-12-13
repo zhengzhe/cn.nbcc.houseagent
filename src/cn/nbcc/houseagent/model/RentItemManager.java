@@ -117,4 +117,9 @@ public class RentItemManager extends ModelObject {
 		return rentItems;
 	}
 
+	public void remove(RentItem deletedItem) {
+		// TODO 添加删除
+		
+	}
+
 }

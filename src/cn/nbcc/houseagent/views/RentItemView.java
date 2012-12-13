@@ -6,9 +6,14 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
 
-import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -17,21 +22,23 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
+import cn.nbcc.houseagent.Activator;
 import cn.nbcc.houseagent.model.RentItem;
 import cn.nbcc.houseagent.model.RentItemManager;
 import cn.nbcc.houseagent.utils.DateUtils;
-import cn.nbcc.houseagent.utils.RentConstants;
 import cn.nbcc.houseagent.wizard.NewRentItemWizard;
 
 
@@ -46,6 +53,10 @@ public class RentItemView extends ViewPart implements PropertyChangeListener{
 	private final String COLUMN_NAMES[]={"编号","所属地区","小区名称","物业名称","租用方式","租金(月)","当前租用状态","登记人","来源","开始时间","到期时间"};
 
 	protected RentItem currentSelectItem;
+
+	private Table table;
+
+	protected NameViewerFilter nameFilter;
 
 	/**
 	 * The content provider class is responsible for providing objects to the
@@ -127,7 +138,7 @@ public class RentItemView extends ViewPart implements PropertyChangeListener{
 	public void createPartControl(Composite parent) {
 		parent.setLayout(new GridLayout(2, false));
 		viewer = new TableViewer(parent, SWT.FULL_SELECTION | SWT.MULTI);
-		Table table = viewer.getTable();
+		table = viewer.getTable();
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
@@ -181,11 +192,80 @@ public class RentItemView extends ViewPart implements PropertyChangeListener{
 			}
 		});
 		
+		hookPopMenu();  
+
 		
 		getViewSite().setSelectionProvider(viewer);
 		
 		
+		
 		viewer.setInput(RentItemManager.getManager().getRentItems());
+	}
+
+	private void hookPopMenu() {
+		MenuManager menuManager = new MenuManager();
+		nameFilter = new NameViewerFilter(viewer);
+		
+		IAction filterAction = new Action("筛选出租信息"){
+			@Override
+			public void run() {
+				InputDialog dialog = new InputDialog(table.getShell(), "出租信息过滤",
+						"输入 名称过滤模式"+
+						"(*=任何字符串,?=任何字符)"+
+						System.getProperty("line.seperator")+
+						"或一个空字符串表示没有过滤",nameFilter.getPattern(),null);
+				if (dialog.open()==InputDialog.OK) {
+					nameFilter.setPattern(dialog.getValue().trim());
+				}
+			}
+		};
+		filterAction.setImageDescriptor(Activator.getImageDescriptor("/icons/filter.gif"));
+		
+		
+		IAction deleteAction = new Action("删除"){
+			public void run() {
+				boolean isConfirm = MessageDialog.openConfirm(table.getShell(), "确定信息","真的要删除信息吗?");
+				if (isConfirm) {
+					if (viewer.getSelection() instanceof IStructuredSelection) {
+						IStructuredSelection selection = (IStructuredSelection)viewer.getSelection();
+						if (selection instanceof RentItem) {
+							RentItem deletedItem = (RentItem) selection;
+							RentItemManager.getManager().remove(deletedItem);
+							viewer.remove(viewer.getSelection());
+						}
+					}
+				}
+			};
+		};
+		deleteAction.setImageDescriptor(Activator.getImageDescriptor("/icons/delete.gif"));
+		
+		IAction addAction = new Action("新增"){
+			public void run() {
+				
+			}
+		};
+		addAction.setImageDescriptor(Activator.getImageDescriptor("/icons/add.gif"));
+		IAction modifyAction = new Action("修改"){
+			public void run() {
+				
+			}
+		};
+		modifyAction.setImageDescriptor(Activator.getImageDescriptor("/icons/modify.gif"));
+		
+		menuManager.add(addAction);
+		menuManager.add(modifyAction);
+		menuManager.add(deleteAction);
+		menuManager.add(filterAction);
+		menuManager.add(new Action(""){
+			@Override
+			public void run() {
+				super.run();
+			}
+		});
+		
+		
+		Menu menu = menuManager.createContextMenu(table);
+		table.setMenu(menu);
 	}
 
 	protected void openWizard(TableViewer viewer2, IStructuredSelection selection) {
@@ -207,5 +287,4 @@ public class RentItemView extends ViewPart implements PropertyChangeListener{
 	public void propertyChange(PropertyChangeEvent evt) {
 		viewer.refresh(currentSelectItem);
 	}
-	
 }

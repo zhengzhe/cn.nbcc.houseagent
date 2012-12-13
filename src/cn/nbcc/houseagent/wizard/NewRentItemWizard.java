@@ -15,7 +15,6 @@ public class NewRentItemWizard extends Wizard implements INewWizard {
 	
 	private RentItemWizardPage1 page1;
 	private RentItemWizardPage2 page2;
-//	private RentItem rentItem;
 
 	public NewRentItemWizard() {
 		// TODO Auto-generated constructor stub

@@ -18,7 +18,7 @@ public class RentContractHandler extends AbstractHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
-			 URL urlRelative= Activator.getDefault().getBundle().getEntry("./doc/doc4.doc");		  
+			 URL urlRelative= Activator.getDefault().getBundle().getEntry("./doc/doc1.doc");		  
 			 URL url=FileLocator.toFileURL(urlRelative);  
 			 String urlStr = url.toString();
 			 String officePath = OfficeUtils.getOfficeUrl();

@@ -2,9 +2,9 @@ package cn.nbcc.houseagent.model;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.text.SimpleDateFormat;
-import java.util.*;
-
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import cn.nbcc.houseagent.utils.RentConstants;
 

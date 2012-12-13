@@ -19,9 +19,9 @@ public class RentItemWizardPage2 extends WizardPage {
 	private Text PMCText;
 	private Text PMCFeeText;
 	private Text landPlanText;
-	private Text text;
-	private Text text_1;
-	private Text text_2;
+	private Text pcIdText;
+	private Text decFeeText;
+	private Text infrastructureText;
 	private RentItem rentItem;
 
 	/**
@@ -95,17 +95,17 @@ public class RentItemWizardPage2 extends WizardPage {
 		label_2.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		label_2.setText("产权类型");
 		
-		Combo combo_1 = new Combo(group, SWT.NONE);
-		combo_1.setItems(new String[] {"房产证和土地证", "产权证", "购房合同、购房证明书、发票", "预售合同和收据", "两证"});
-		combo_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		combo_1.select(0);
+		Combo pcTypeCombo = new Combo(group, SWT.NONE);
+		pcTypeCombo.setItems(new String[] {"房产证和土地证", "产权证", "购房合同、购房证明书、发票", "预售合同和收据", "两证"});
+		pcTypeCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		pcTypeCombo.select(0);
 		
 		Label label = new Label(group, SWT.NONE);
 		label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		label.setText("产权证号");
 		
-		text = new Text(group, SWT.BORDER);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		pcIdText = new Text(group, SWT.BORDER);
+		pcIdText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Group group_1 = new Group(container, SWT.NONE);
 		group_1.setText("装修详细信息");
@@ -122,23 +122,23 @@ public class RentItemWizardPage2 extends WizardPage {
 		label_3.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		label_3.setText("装修费用");
 		
-		text_1 = new Text(group_1, SWT.BORDER);
-		text_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		decFeeText = new Text(group_1, SWT.BORDER);
+		decFeeText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		
 		Label label_4 = new Label(group_1, SWT.NONE);
 		label_4.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 1, 1));
 		label_4.setText("基本设施:");
 		
-		text_2 = new Text(group_1, SWT.BORDER);
-		GridData gd_text_2 = new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1);
-		gd_text_2.heightHint = 50;
-		text_2.setLayoutData(gd_text_2);
+		infrastructureText = new Text(group_1, SWT.BORDER);
+		GridData gd_infrastructureText = new GridData(SWT.FILL, SWT.TOP, true, false, 3, 1);
+		gd_infrastructureText.heightHint = 50;
+		infrastructureText.setLayoutData(gd_infrastructureText);
 		
-		Button button = new Button(group_1, SWT.NONE);
-		GridData gd_button = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
-		gd_button.widthHint = 48;
-		button.setLayoutData(gd_button);
-		button.setText("添加");
+		Button addButton = new Button(group_1, SWT.NONE);
+		GridData gd_addButton = new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1);
+		gd_addButton.widthHint = 48;
+		addButton.setLayoutData(gd_addButton);
+		addButton.setText("添加");
 	}
 
 }
